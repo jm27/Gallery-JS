@@ -41,7 +41,7 @@ Gallery.prototype.openModal = function () {
 
   // Event Listeners
   window.addEventListener("keyup", this.handleKeyUp);
-  this.nextButton.addEventListener("click", this.showNextImage);
+  this.nextButton.addEventListener("click", () => this.showNextImage());
   this.prevButton.addEventListener("click", this.showPrevImage);
 };
 
@@ -49,7 +49,7 @@ Gallery.prototype.closeModal = function () {
   this.modal.classList.remove("open");
   // add event listeners for clicks and keyboard
   window.removeEventListener("keyup", this.handleKeyUp);
-  this.nextButton.removeEventListener("click", this.showNextImage);
+  this.nextButton.removeEventListener("click", () => this.showNextImage());
   this.prevButton.removeEventListener("click", this.showPrevImage);
   // console.log("modal closed!");
 };
@@ -67,10 +67,12 @@ Gallery.prototype.handleKeyUp = function (e) {
 };
 
 Gallery.prototype.showNextImage = function () {
-  this.showImage(currentImage.nextElementSibling || gallery.firstElementChild);
+  this.showImage(this.currentImage.nextElementSibling || this.gallery.firstElementChild);
 };
 Gallery.prototype.showPrevImage = function () {
-  this.showImage(currentImage.previousElementSibling || gallery.lastElementChild);
+  this.showImage(
+    this.currentImage.previousElementSibling || this.gallery.lastElementChild
+  );
 };
 
 Gallery.prototype.showImage = function (el) {
